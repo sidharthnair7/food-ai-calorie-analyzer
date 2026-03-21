@@ -7,75 +7,87 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+    .h{
+        font-family: "Montserrat", sans-serif;
+    }
+    .p{
+        font-family: "Inter", sans-serif;
+    }
+</style>
+
 </head>
 
-<body>
+<body class="p">
     <!-- header section -->
     <head>
         <!-- navbar -->
         <div>
-           <div class="navbar bg-base-100 shadow-sm">
+           <div class="navbar bg-[#013220] text-white bg-base-100 fixed top-0 w-full z-50 shadow-md">
             <div class="flex-1 "><a class="btn btn-ghost text-xl">Nutrico</a>
             </div>
            <div class="flex gap-2">
     <!-- <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" /> -->
-     <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
-      <li><a>Bmi calculator</a></li>
-      <li><a>Test Food</a></li>
-      <li><a>Budget food recipes</a></li>
-    </ul>
-  </div>
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+             <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+              <li><a>Bmi calculator</a></li>
+              <li><a>Test Food</a></li>
+              <li><a>Budget food recipes</a></li>
+            </ul>
+          </div>
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+              </div>
+              <ul
+                tabindex="-1"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li>
+                  <a class="justify-between">
+                    Profile
+                    <span class="badge">New</span>
+                  </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <ul
-        tabindex="-1"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li>
-          <a class="justify-between">
-            Profile
-            <span class="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
         </div>
 
         <!-- hero section -->
+            <div>
+            <div class="hero min-h-screen " style="background-image: url('asset/hero header background.jpg');"       >
+              <div class="hero-overlay backdrop-brightness-50 bg-transparent"></div>
+               <div class="hero-content lg:gap-10 w-4/5 mx-auto flex-col lg:flex-row">
+        <img src="asset/nutrition.jpg" class="max-w-sm rounded-full shadow-2xl"/>
         <div>
-        <div class="hero min-h-screen " style="background-image: url('asset/hero header background.jpg');"       >
-          <div class="hero-overlay backdrop-brightness-50 bg-transparent"></div>
-           <div class="hero-content  w-4/5 mx-auto flex-col lg:flex-row">
-    <img src="asset/nutrition.jpg" class="max-w-sm rounded-full shadow-2xl"/>
-    <div>
-      <h1 class="text-5xl font-bold text-white">LISTEN NUTRITION HEALTHS</h1>
-      <p class="text-white py-6">Powered by Gemini AI and informed by elite health experts, we provide tailored nutritional guidance to ensure your wellness journey is truly personal</p>
-      <button class="btn btn-primary text-[#14452F] bg-white">Get Started</button>
-    </div>
-    </div>
-    </div>
+          <h1 class="text-5xl font-bold text-white h">LISTEN NUTRITION HEALTHS</h1>
+          <p class="text-white py-6">Powered by Gemini AI and informed by elite health experts, we provide tailored nutritional guidance to ensure your wellness journey is truly personal</p>
+          <button class="btn btn-primary text-[#14452F] bg-white">Get Started</button>
         </div>
-    </head>
+        </div>
+        </div>
+            </div>
+        </head>
 
     <!-- main section -->
     <main>
        <!-- camera section -->
         <div class="hero bg-base-200 min-h-screen bg-[#cae9be]">
-        <div class="hero-content w-4/5 mx-auto flex-col lg:flex-row-reverse lg:gap-20">
+        <div class="hero-content w-4/5 mx-auto flex-col lg:flex-row-reverse lg:gap-10">
 
         <img src="asset/camera.jpg" class="cursor-pointer max-w-sm rounded-lg shadow-2xl" alt="">
         <div>
-           <h1 class="text-5xl font-bold text-[#22311d]">Intelligent Nutrition Tracking</h1>
+           <h1 class="text-5xl font-bold text-[#22311d] h">Intelligent Nutrition Tracking</h1>
            <p class="py-6 text-[#22311d]"> Simply snap a photo of your meal to unlock instant nutritional insights. Our Gemini AI analyzes your food values, while our network of health experts ensures every suggestion is tailored to your unique wellness goals.</p>
          </div>
         </div>
@@ -83,9 +95,9 @@
 
         <!-- login form -->
          <div class="hero bg-base-200 min-h-screen">
-  <div class="hero-content w-4/5 mx-auto flex-col  lg:flex-row-reverse">
+  <div class="hero-content w-4/5 mx-auto flex-col lg:gap-10 lg:flex-row-reverse">
     <div class="text-center lg:text-left">
-      <h1 class="text-5xl font-bold">Login now!</h1>
+      <h1 class="text-5xl font-bold h">Login now!</h1>
       <p class="py-6">
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.
@@ -113,8 +125,6 @@
   <nav class="grid grid-flow-col gap-4">
     <a class="link link-hover">About us</a>
     <a class="link link-hover">Contact</a>
-    <a class="link link-hover">Jobs</a>
-    <a class="link link-hover">Press kit</a>
   </nav>
   <nav>
     <div class="grid grid-flow-col gap-4">
@@ -130,23 +140,11 @@
         </svg>
       </a>
       <a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          class="fill-current">
-          <path
-            d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"> <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
         </svg>
       </a>
       <a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          class="fill-current">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
           <path
             d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
         </svg>
