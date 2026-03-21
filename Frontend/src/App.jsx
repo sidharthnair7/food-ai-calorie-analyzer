@@ -132,8 +132,9 @@ export default function App() {
             <div style={{ flex: 1, minWidth: 280 }}>
               <h1 style={{
                 fontFamily: "'Montserrat',sans-serif",
-                fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 800,
-                color: "#22311d", marginBottom: "1.2rem"
+                fontSize: "clamp(1.5rem, 2.5vw, 2.2rem)", fontWeight: 800,
+                color: "#22311d", marginBottom: "1.2rem",textAlign: "left",
+                lineHeight: 1.3
               }}>Intelligent Nutrition Tracking</h1>
               <p style={{ color: "#22311d", fontSize: "1.05rem", lineHeight: 1.75, marginBottom: "2rem" }}>
                 Simply snap a photo of your meal to unlock instant nutritional insights.
