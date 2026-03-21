@@ -3,911 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutrico – My Profile</title>
+    <title>Nutrico - Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --dark-green:  #013220;
-            --mid-green:   #14452F;
-            --leaf:        #57aa46;
-            --mint:        #cae9be;
-            --pale:        #edf7ea;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--pale);
-            color: #1a2e1a;
-        }
-
-        .h { font-family: 'Montserrat', sans-serif; }
-
-        /* ── Navbar ── */
-        .navbar-custom {
-            background: var(--dark-green);
-            position: fixed; top: 0; width: 100%; z-index: 50;
-            box-shadow: 0 2px 16px rgba(1,50,32,.45);
-        }
-
-        /* ── Profile Banner ── */
-        .banner {
-            background: linear-gradient(135deg, var(--dark-green) 0%, #1a5c3a 55%, #2d7a50 100%);
-            position: relative;
-            overflow: hidden;
-            padding: 110px 0 0;
-        }
-
-        .banner::before {
-            content: '';
-            position: absolute; inset: 0;
-            background-image:
-                radial-gradient(circle at 80% 20%, rgba(87,170,70,.25) 0%, transparent 50%),
-                radial-gradient(circle at 10% 80%, rgba(202,233,190,.12) 0%, transparent 45%);
-            pointer-events: none;
-        }
-
-        /* floating leaf blobs */
-        .leaf-blob {
-            position: absolute;
-            border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-            opacity: .06;
-            background: #74f681;
-        }
-
-        .banner-inner {
-            position: relative; z-index: 2;
-            max-width: 960px; margin: 0 auto;
-            padding: 40px 24px 0;
-            display: flex; align-items: flex-end; gap: 28px;
-        }
-
-        .avatar-ring {
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--leaf), #a8e6a0);
-            padding: 4px;
-            flex-shrink: 0;
-            box-shadow: 0 8px 32px rgba(0,0,0,.35);
-        }
-
-        .avatar-ring img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--dark-green);
-        }
-
-        .banner-text { color: #fff; padding-bottom: 20px; }
-        .banner-text h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -.02em; }
-        .banner-text p  { color: rgba(255,255,255,.65); font-size: .9rem; margin-top: 3px; }
-
-        .banner-tabs {
-            background: var(--dark-green);
-            border-top: 1px solid rgba(255,255,255,.08);
-            position: relative; z-index: 2;
-        }
-
-        .banner-tabs ul {
-            max-width: 960px; margin: 0 auto;
-            display: flex; list-style: none; padding: 0 24px;
-        }
-
-        .banner-tabs ul li a {
-            display: block; padding: 14px 20px;
-            color: rgba(255,255,255,.55);
-            font-size: .85rem; font-weight: 600; letter-spacing: .03em;
-            text-transform: uppercase; text-decoration: none;
-            border-bottom: 3px solid transparent;
-            transition: all .2s;
-        }
-
-        .banner-tabs ul li a:hover,
-        .banner-tabs ul li a.active {
-            color: #fff;
-            border-bottom-color: var(--leaf);
-        }
-
-        /* ── Page Body ── */
-        .page-body {
-            max-width: 960px; margin: 32px auto;
-            padding: 0 24px 60px;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 720px) {
-            .page-body { grid-template-columns: 1fr; }
-        }
-
-        /* ── Cards ── */
-        .card-box {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(1,50,32,.07);
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 18px 22px 12px;
-            border-bottom: 1px solid #eee;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-
-        .card-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .95rem; font-weight: 700;
-            letter-spacing: .01em;
-            color: var(--mid-green);
-        }
-
-        .card-body-pad { padding: 18px 22px; }
-
-        /* edit btn */
-        .btn-edit {
-            font-size: .78rem; font-weight: 600;
-            color: var(--leaf);
-            background: none; border: 1.5px solid var(--leaf);
-            border-radius: 20px; padding: 4px 14px;
-            cursor: pointer; transition: all .2s;
-        }
-        .btn-edit:hover { background: var(--leaf); color: #fff; }
-
-        /* ── Stat pills ── */
-        .stat-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 12px; padding: 18px 22px;
-        }
-
-        .stat-pill {
-            background: var(--pale);
-            border-radius: 12px;
-            padding: 14px;
-            text-align: center;
-        }
-
-        .stat-pill .val {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem; font-weight: 800;
-            color: var(--dark-green);
-            line-height: 1;
-        }
-
-        .stat-pill .lbl {
-            font-size: .74rem; color: #7a9a7a;
-            margin-top: 4px; font-weight: 500;
-        }
-
-        /* ── BMI arc ── */
-        .bmi-wrap { padding: 20px 22px; text-align: center; }
-
-        .bmi-arc-svg { overflow: visible; }
-
-        .bmi-number {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem; font-weight: 800;
-            fill: var(--dark-green);
-        }
-
-        .bmi-label { font-size: .8rem; fill: #7a9a7a; }
-
-        /* ── Macro bars ── */
-        .macro-row {
-            display: flex; align-items: center; gap: 12px;
-            padding: 10px 22px;
-        }
-
-        .macro-name { font-size: .82rem; font-weight: 600; width: 68px; color: #3a5a3a; }
-
-        .macro-track {
-            flex: 1; height: 8px;
-            background: #eee; border-radius: 99px; overflow: hidden;
-        }
-
-        .macro-fill {
-            height: 100%; border-radius: 99px;
-            transition: width .8s cubic-bezier(.4,0,.2,1);
-        }
-
-        .macro-val { font-size: .78rem; color: #7a9a7a; width: 54px; text-align: right; }
-
-        /* ── Goals ── */
-        .goal-item {
-            display: flex; align-items: center; gap: 14px;
-            padding: 12px 22px;
-            border-bottom: 1px solid #f4f4f4;
-        }
-        .goal-item:last-child { border-bottom: none; }
-
-        .goal-icon {
-            width: 40px; height: 40px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.15rem; flex-shrink: 0;
-        }
-
-        .goal-info { flex: 1; }
-        .goal-info .gtitle { font-size: .88rem; font-weight: 600; color: #1a2e1a; }
-        .goal-info .gsub   { font-size: .76rem; color: #7a9a7a; margin-top: 2px; }
-
-        .goal-badge {
-            font-size: .72rem; font-weight: 700;
-            padding: 3px 10px; border-radius: 99px;
-        }
-
-        /* ── Recent Meals ── */
-        .meal-row {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 22px;
-            border-bottom: 1px solid #f5f5f5;
-            transition: background .15s;
-        }
-        .meal-row:last-child { border-bottom: none; }
-        .meal-row:hover { background: var(--pale); }
-
-        .meal-thumb {
-            width: 46px; height: 46px;
-            border-radius: 10px; object-fit: cover;
-            background: var(--mint); flex-shrink: 0;
-            font-size: 1.4rem;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .meal-info { flex: 1; }
-        .meal-info .mname { font-size: .88rem; font-weight: 600; color: #1a2e1a; }
-        .meal-info .mtime { font-size: .74rem; color: #7a9a7a; margin-top: 2px; }
-
-        .meal-cal {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .95rem; font-weight: 700; color: var(--dark-green);
-        }
-
-        /* ── Achievements ── */
-        .achieve-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 12px; padding: 18px 22px;
-        }
-
-        .achieve-item { text-align: center; }
-
-        .achieve-badge {
-            width: 52px; height: 52px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; margin: 0 auto 8px;
-        }
-
-        .achieve-item span {
-            font-size: .72rem; font-weight: 600; color: #4a6a4a;
-            display: block; line-height: 1.3;
-        }
-
-        /* ── Edit modal ── */
-        .modal-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
-            z-index: 200; align-items: center; justify-content: center;
-        }
-        .modal-overlay.open { display: flex; }
-
-        .modal-box {
-            background: #fff; border-radius: 20px;
-            width: 440px; max-width: 94vw;
-            padding: 32px; box-shadow: 0 24px 60px rgba(0,0,0,.25);
-            animation: slideUp .3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to   { transform: translateY(0);    opacity: 1; }
-        }
-
-        .modal-box h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem; font-weight: 800;
-            color: var(--dark-green); margin-bottom: 20px;
-        }
-
-        .form-group { margin-bottom: 14px; }
-        .form-group label {
-            display: block; font-size: .8rem; font-weight: 600;
-            color: #4a6a4a; margin-bottom: 5px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%; padding: 10px 14px;
-            border: 1.5px solid #ddeedd;
-            border-radius: 10px; font-size: .9rem;
-            background: var(--pale); color: #1a2e1a;
-            transition: border-color .2s; outline: none;
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus { border-color: var(--leaf); }
-
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-        .modal-actions {
-            display: flex; gap: 10px; margin-top: 22px;
-        }
-
-        .btn-save {
-            flex: 1; padding: 12px;
-            background: var(--dark-green); color: #fff;
-            border: none; border-radius: 12px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: .9rem; font-weight: 700;
-            cursor: pointer; transition: background .2s;
-        }
-        .btn-save:hover { background: var(--mid-green); }
-
-        .btn-cancel {
-            flex: 1; padding: 12px;
-            background: #f0f0f0; color: #555;
-            border: none; border-radius: 12px;
-            font-size: .9rem; font-weight: 600;
-            cursor: pointer; transition: background .2s;
-        }
-        .btn-cancel:hover { background: #e0e0e0; }
-
-        /* ── Calorie ring ── */
-        .calorie-ring-section { padding: 20px 22px; }
-
-        .ring-wrap {
-            display: flex; align-items: center; gap: 20px;
-        }
-
-        .ring-legend { flex: 1; }
-        .ring-legend-item {
-            display: flex; align-items: center; gap: 8px;
-            font-size: .8rem; color: #4a6a4a; margin-bottom: 8px;
-        }
-        .ring-dot { width: 10px; height: 10px; border-radius: 50%; }
-
-        /* Progress ring animation */
-        .progress-circle {
-            transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1);
-        }
-
-        /* ── AI Tip card ── */
-        .ai-tip {
-            background: linear-gradient(135deg, var(--dark-green), #1a5c3a);
-            border-radius: 14px; padding: 18px;
-            color: #fff; margin: 0 22px 18px;
-            position: relative; overflow: hidden;
-        }
-
-        .ai-tip::before {
-            content: '✦';
-            position: absolute; right: 16px; top: 12px;
-            font-size: 2rem; opacity: .15;
-        }
-
-        .ai-tip .tip-label {
-            font-size: .7rem; font-weight: 700;
-            letter-spacing: .1em; text-transform: uppercase;
-            color: #a8e6a0; margin-bottom: 6px;
-        }
-
-        .ai-tip p { font-size: .83rem; line-height: 1.55; color: rgba(255,255,255,.85); }
-
-        /* ── Fade-in animation ── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-up { animation: fadeUp .5s ease both; }
-        .delay-1 { animation-delay: .05s; }
-        .delay-2 { animation-delay: .12s; }
-        .delay-3 { animation-delay: .2s; }
-        .delay-4 { animation-delay: .28s; }
-
-        /* ── Streak badge ── */
-        .streak-banner {
-            background: linear-gradient(90deg, #e8f9e2, #c6edd8);
-            border-radius: 12px; margin: 0 22px 18px;
-            padding: 12px 16px;
-            display: flex; align-items: center; gap: 10px;
-        }
-
-        .streak-banner .fire { font-size: 1.4rem; }
-        .streak-banner .streak-text { font-size: .83rem; font-weight: 600; color: var(--mid-green); }
-        .streak-banner .streak-sub  { font-size: .73rem; color: #7a9a7a; }
+        .h { font-family: "Montserrat", sans-serif; }
+        .p { font-family: "Inter", sans-serif; }
     </style>
 </head>
 
-<body>
+<body class="p bg-[#edf7ea] min-h-screen">
 
-<!-- ══ NAVBAR ══ -->
-<div class="navbar-custom">
-    <div class="navbar text-white" style="max-width:960px;margin:0 auto;padding:0 24px;">
+    <!-- NAVBAR (original) -->
+    <div class="navbar bg-[#013220] text-white bg-base-100 fixed top-0 w-full z-50 shadow-md">
         <div class="flex-1">
-            <a href="index.html" class="btn btn-ghost text-xl h">Nutrico</a>
+            <a href="index.html" class="btn btn-ghost text-xl">Nutrico</a>
         </div>
         <div class="flex gap-2">
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li><a href="index.html" class="btn btn-ghost text-sm">Home</a></li>
-                    <li><a href="bmi.html" class="btn btn-ghost text-sm">BMI Calculator</a></li>
-                    <li><a href="" class="btn btn-ghost text-sm">Scan Meal</a></li>
-                    <li><a href="" class="btn btn-ghost text-sm">Recipes</a></li>
+                    <li><a href="bmi.html" class="btn btn-ghost">BMI calculator</a></li>
+                    <li><a href="" class="btn btn-ghost">Test Food</a></li>
+                    <li><a href="" class="btn btn-ghost">Budget food recipes</a></li>
                 </ul>
             </div>
             <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
-                        <img alt="User avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <img alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>
                 </div>
-                <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow text-black">
-                    <li><a class="justify-between">Profile<span class="badge badge-sm" style="background:var(--leaf);color:#fff;">You</span></a></li>
+                <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li>
+                        <a class="justify-between">Profile<span class="badge">New</span></a>
+                    </li>
                     <li><a>Settings</a></li>
                     <li><a>Logout</a></li>
                 </ul>
             </div>
         </div>
     </div>
-</div>
 
-<!-- ══ BANNER ══ -->
-<div class="banner">
-    <div class="leaf-blob" style="width:260px;height:260px;top:-60px;right:8%"></div>
-    <div class="leaf-blob" style="width:160px;height:160px;bottom:20px;left:5%"></div>
+    <!-- PAGE CONTENT -->
+    <div class="pt-20 max-w-4xl mx-auto px-4 pb-16">
+        <div class="flex flex-col lg:flex-row gap-5 mt-6">
 
-    <div class="banner-inner">
-        <div class="avatar-ring">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User" id="avatarImg" />
-        </div>
-        <div class="banner-text">
-            <h1 class="h" id="displayName">Alex Johnson</h1>
-            <p id="displayGoal">🎯 Goal: Lose Weight · 1,800 kcal/day target</p>
+            <!-- LEFT: Profile Info -->
+            <div class="flex flex-col gap-5 lg:w-72">
+
+                <!-- Profile Card -->
+                <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body items-center text-center gap-3">
+                        <div class="avatar">
+                            <div class="w-20 rounded-full ring ring-[#57aa46] ring-offset-2">
+                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="h font-bold text-lg text-[#013220]" id="displayName">Alex Johnson</h2>
+                            <p class="text-sm text-gray-400" id="displayGoal">🎯 Lose Weight</p>
+                        </div>
+
+                        <div class="divider my-0"></div>
+
+                        <div class="w-full text-sm text-left flex flex-col gap-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Age</span>
+                                <span class="font-semibold" id="infoAge">27 years</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Gender</span>
+                                <span class="font-semibold" id="infoGender">Female</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Activity</span>
+                                <span class="font-semibold" id="infoActivity">Mod. Active</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Diet</span>
+                                <span class="font-semibold" id="infoDiet">Balanced</span>
+                            </div>
+                        </div>
+
+                        <div class="divider my-0"></div>
+
+                        <!-- BMI Arc -->
+                        <div class="w-full text-center">
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">BMI</p>
+                            <svg width="150" height="88" viewBox="0 0 160 95" overflow="visible" class="mx-auto">
+                                <defs>
+                                    <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%"   stop-color="#f97316"/>
+                                        <stop offset="40%"  stop-color="#eab308"/>
+                                        <stop offset="70%"  stop-color="#57aa46"/>
+                                        <stop offset="100%" stop-color="#014a30"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 16 88 A 64 64 0 0 1 144 88" fill="none" stroke="#e5e5e5" stroke-width="11" stroke-linecap="round"/>
+                                <path d="M 16 88 A 64 64 0 0 1 144 88" fill="none" stroke="url(#arcGrad)" stroke-width="11"
+                                      stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="70"
+                                      id="arcFill" style="transition:stroke-dashoffset 1s ease"/>
+                                <text x="80" y="72" text-anchor="middle"
+                                      style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;fill:#013220"
+                                      id="bmiVal">22.3</text>
+                                <text x="80" y="86" text-anchor="middle"
+                                      style="font-size:10px;fill:#888" id="bmiCat">Normal Weight</text>
+                            </svg>
+                        </div>
+
+                        <!-- Weight / Height -->
+                        <div class="grid grid-cols-2 gap-3 w-full">
+                            <div class="bg-[#edf7ea] rounded-xl p-3 text-center">
+                                <div class="h font-extrabold text-2xl text-[#013220]" id="statWeight">62</div>
+                                <div class="text-xs text-gray-400">kg</div>
+                            </div>
+                            <div class="bg-[#edf7ea] rounded-xl p-3 text-center">
+                                <div class="h font-extrabold text-2xl text-[#013220]" id="statHeight">165</div>
+                                <div class="text-xs text-gray-400">cm</div>
+                            </div>
+                        </div>
+
+                        <!-- Edit button -->
+                        <button class="btn btn-outline btn-sm w-full mt-1 border-[#57aa46] text-[#57aa46] hover:bg-[#57aa46] hover:border-[#57aa46]"
+                                onclick="document.getElementById('editModal').showModal()">
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: Nutrition + Goals + AI -->
+            <div class="flex flex-col gap-5 flex-1">
+
+                <!-- Today's Nutrition -->
+                <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="flex justify-between items-center mb-2">
+                            <h2 class="h font-bold text-[#013220]">Today's Nutrition</h2>
+                            <span class="text-xs text-gray-400" id="todayDate"></span>
+                        </div>
+
+                        <!-- Calorie ring + legend -->
+                        <div class="flex items-center gap-6">
+                            <svg width="100" height="100" viewBox="0 0 110 110" class="shrink-0">
+                                <circle cx="55" cy="55" r="42" fill="none" stroke="#e5e5e5" stroke-width="12"/>
+                                <circle cx="55" cy="55" r="42" fill="none" stroke="#57aa46" stroke-width="12"
+                                        stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="79"
+                                        style="transition:stroke-dashoffset 1s ease" transform="rotate(-90 55 55)"/>
+                                <text x="55" y="50" text-anchor="middle"
+                                      style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;fill:#013220">1,340</text>
+                                <text x="55" y="63" text-anchor="middle" style="font-size:8px;fill:#888">of 1,800 kcal</text>
+                            </svg>
+                            <div class="text-sm flex flex-col gap-2">
+                                <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#57aa46] inline-block"></span> Consumed — <strong>1,340 kcal</strong></div>
+                                <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-gray-200 inline-block"></span> Remaining — <strong>460 kcal</strong></div>
+                                <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-orange-400 inline-block"></span> Burned — <strong>220 kcal</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Macros -->
+                        <p class="text-xs text-gray-400 uppercase tracking-widest mt-3 mb-2">Macros</p>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-3 text-sm">
+                                <span class="w-14 font-semibold text-[#3a5a3a]">Protein</span>
+                                <progress class="progress flex-1" style="accent-color:#57aa46" value="72" max="100"></progress>
+                                <span class="text-xs text-gray-400 w-16 text-right">72 / 100g</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                <span class="w-14 font-semibold text-[#3a5a3a]">Carbs</span>
+                                <progress class="progress flex-1" style="accent-color:#3b82f6" value="58" max="100"></progress>
+                                <span class="text-xs text-gray-400 w-16 text-right">116 / 200g</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                <span class="w-14 font-semibold text-[#3a5a3a]">Fat</span>
+                                <progress class="progress flex-1" style="accent-color:#f59e0b" value="44" max="100"></progress>
+                                <span class="text-xs text-gray-400 w-16 text-right">26 / 60g</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wellness Goals -->
+                <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h font-bold text-[#013220] mb-2">Wellness Goals</h2>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="text-xl w-9 h-9 bg-green-100 rounded-lg flex items-center justify-center shrink-0">🏋️</div>
+                                <div class="flex-1 text-sm">
+                                    <div class="font-semibold">Lose 5 kg</div>
+                                    <div class="text-gray-400 text-xs">Target: June 2025 · −3 kg so far</div>
+                                </div>
+                                <span class="badge badge-sm bg-green-100 text-green-700 border-0">60%</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-xl w-9 h-9 bg-yellow-100 rounded-lg flex items-center justify-center shrink-0">💧</div>
+                                <div class="flex-1 text-sm">
+                                    <div class="font-semibold">Drink 2.5L Water</div>
+                                    <div class="text-gray-400 text-xs">Today: 1.8L logged</div>
+                                </div>
+                                <span class="badge badge-sm bg-yellow-100 text-yellow-700 border-0">72%</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-xl w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">🥦</div>
+                                <div class="flex-1 text-sm">
+                                    <div class="font-semibold">5 Servings of Veggies</div>
+                                    <div class="text-gray-400 text-xs">Today: 3 of 5 logged</div>
+                                </div>
+                                <span class="badge badge-sm bg-purple-100 text-purple-700 border-0">60%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Insight -->
+                <div class="card bg-[#013220] text-white shadow-sm">
+                    <div class="card-body">
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#a8e6a0] mb-1">✦ Gemini AI Recommendation</p>
+                        <p class="text-sm leading-relaxed opacity-85">Your protein intake is on track, but you're running low on complex carbs. Consider adding a sweet potato or brown rice to your next meal to keep energy steady.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div class="banner-tabs">
-        <ul>
-            <li><a href="#" class="active">Overview</a></li>
-            <li><a href="#">Meals</a></li>
-            <li><a href="#">Progress</a></li>
-        </ul>
-    </div>
-</div>
 
-<!-- ══ PAGE BODY ══ -->
-<div class="page-body">
-
-    <!-- ── LEFT COLUMN ── -->
-    <aside>
-
-        <!-- Profile Info -->
-        <div class="card-box fade-up delay-1" style="margin-bottom:20px">
-            <div class="card-header">
-                <h2>Profile</h2>
-                <button class="btn-edit" onclick="openModal()">Edit</button>
-            </div>
-            <div class="card-body-pad" style="padding-bottom:8px">
-                <div style="display:flex;flex-direction:column;gap:10px">
-                    <div style="display:flex;justify-content:space-between;font-size:.84rem">
-                        <span style="color:#7a9a7a">Name</span>
-                        <span style="font-weight:600" id="infoName">Alex Johnson</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;font-size:.84rem">
-                        <span style="color:#7a9a7a">Age</span>
-                        <span style="font-weight:600" id="infoAge">27 years</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;font-size:.84rem">
-                        <span style="color:#7a9a7a">Gender</span>
-                        <span style="font-weight:600" id="infoGender">Female</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;font-size:.84rem">
-                        <span style="color:#7a9a7a">Activity</span>
-                        <span style="font-weight:600" id="infoActivity">Moderately Active</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;font-size:.84rem">
-                        <span style="color:#7a9a7a">Diet</span>
-                        <span style="font-weight:600" id="infoDiet">Balanced</span>
-                    </div>
+    <!-- EDIT MODAL (DaisyUI dialog) -->
+    <dialog id="editModal" class="modal">
+        <div class="modal-box max-w-sm">
+            <h3 class="h font-bold text-lg text-[#013220] mb-4">Edit Profile</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="form-control">
+                    <label class="label py-1"><span class="label-text text-xs font-semibold">First Name</span></label>
+                    <input type="text" id="fName" value="Alex" class="input input-bordered input-sm bg-[#edf7ea]"/>
+                </div>
+                <div class="form-control">
+                    <label class="label py-1"><span class="label-text text-xs font-semibold">Last Name</span></label>
+                    <input type="text" id="lName" value="Johnson" class="input input-bordered input-sm bg-[#edf7ea]"/>
                 </div>
             </div>
-
-            <!-- BMI Arc -->
-            <div class="bmi-wrap">
-                <svg class="bmi-arc-svg" width="160" height="95" viewBox="0 0 160 95">
-                    <defs>
-                        <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%"   stop-color="#f97316"/>
-                            <stop offset="33%"  stop-color="#eab308"/>
-                            <stop offset="66%"  stop-color="#57aa46"/>
-                            <stop offset="100%" stop-color="#14452f"/>
-                        </linearGradient>
-                    </defs>
-                    <!-- Track -->
-                    <path d="M 16 88 A 64 64 0 0 1 144 88"
-                          fill="none" stroke="#e8e8e8" stroke-width="12" stroke-linecap="round"/>
-                    <!-- Fill -->
-                    <path d="M 16 88 A 64 64 0 0 1 144 88"
-                          fill="none" stroke="url(#arcGrad)" stroke-width="12"
-                          stroke-linecap="round"
-                          stroke-dasharray="200" stroke-dashoffset="70"
-                          id="arcFill" style="transition:stroke-dashoffset 1s ease"/>
-                    <!-- Needle dot at current position -->
-                    <circle cx="103" cy="38" r="5" fill="#013220" id="arcDot"/>
-                    <text x="80" y="74" text-anchor="middle" class="bmi-number" id="bmiVal">22.3</text>
-                    <text x="80" y="88" text-anchor="middle" class="bmi-label" id="bmiCat">Normal Weight</text>
-                </svg>
-            </div>
-
-            <!-- Stats pills -->
-            <div class="stat-grid" style="padding-top:0">
-                <div class="stat-pill">
-                    <div class="val" id="statWeight">62</div>
-                    <div class="lbl">Weight (kg)</div>
+            <div class="grid grid-cols-2 gap-3 mt-2">
+                <div class="form-control">
+                    <label class="label py-1"><span class="label-text text-xs font-semibold">Age</span></label>
+                    <input type="number" id="fAge" value="27" class="input input-bordered input-sm bg-[#edf7ea]"/>
                 </div>
-                <div class="stat-pill">
-                    <div class="val" id="statHeight">165</div>
-                    <div class="lbl">Height (cm)</div>
+                <div class="form-control">
+                    <label class="label py-1"><span class="label-text text-xs font-semibold">Gender</span></label>
+                    <select id="fGender" class="select select-bordered select-sm bg-[#edf7ea]">
+                        <option>Female</option><option>Male</option><option>Non-binary</option>
+                    </select>
                 </div>
             </div>
-        </div>
-
-        <!-- Achievements -->
-        <div class="card-box fade-up delay-2">
-            <div class="card-header"><h2>Achievements</h2></div>
-            <div class="achieve-grid">
-                <div class="achieve-item">
-                    <div class="achieve-badge" style="background:#fef9c3">🥗</div>
-                    <span>7-Day<br>Streak</span>
+            <div class="grid grid-cols-2 gap-3 mt-2">
+                <div class="form-control">
+                    <label class="label py-1"><span class="label-text text-xs font-semibold">Weight (kg)</span></label>
+                    <input type="number" id="fWeight" value="62" step="0.1" class="input input-bordered input-sm bg-[#edf7ea]"/>
                 </div>
-                <div class="achieve-item">
-                    <div class="achieve-badge" style="background:#dcfce7">💧</div>
-                    <span>Hydration<br>Goal</span>
-                </div>
-                <div class="achieve-item">
-                    <div class="achieve-badge" style="background:#ffe4e6">🔥</div>
-                    <span>Calorie<br>Crusher</span>
-                </div>
-                <div class="achieve-item">
-                    <div class="achieve-badge" style="background:#e0f2fe">🌿</div>
-                    <span>Clean<br>Eater</span>
+                <div class="form-control">
+                    <label class="label py-1"><span class="label-text text-xs font-semibold">Height (cm)</span></label>
+                    <input type="number" id="fHeight" value="165" step="0.1" class="input input-bordered input-sm bg-[#edf7ea]"/>
                 </div>
             </div>
-        </div>
-
-    </aside>
-
-    <!-- ── RIGHT COLUMN ── -->
-    <main>
-
-        <!-- Daily Nutrition Ring + Macros -->
-        <div class="card-box fade-up delay-1" style="margin-bottom:20px">
-            <div class="card-header">
-                <h2>Today's Nutrition</h2>
-                <span style="font-size:.76rem;color:#7a9a7a" id="todayDate">Saturday, Mar 21</span>
-            </div>
-
-            <div class="calorie-ring-section">
-                <div class="ring-wrap">
-                    <!-- Donut ring -->
-                    <svg width="110" height="110" viewBox="0 0 110 110">
-                        <!-- BG -->
-                        <circle cx="55" cy="55" r="42" fill="none" stroke="#eee" stroke-width="13"/>
-                        <!-- Calories consumed -->
-                        <circle cx="55" cy="55" r="42" fill="none"
-                                stroke="var(--leaf)" stroke-width="13"
-                                stroke-linecap="round"
-                                stroke-dasharray="264" stroke-dashoffset="79"
-                                class="progress-circle"
-                                transform="rotate(-90 55 55)"/>
-                        <text x="55" y="50" text-anchor="middle"
-                              style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;fill:#013220">1,340</text>
-                        <text x="55" y="63" text-anchor="middle"
-                              style="font-size:8px;fill:#7a9a7a">of 1,800 kcal</text>
-                    </svg>
-
-                    <div class="ring-legend">
-                        <div class="ring-legend-item">
-                            <div class="ring-dot" style="background:var(--leaf)"></div>
-                            <span>Consumed — <strong>1,340 kcal</strong></span>
-                        </div>
-                        <div class="ring-legend-item">
-                            <div class="ring-dot" style="background:#eee"></div>
-                            <span>Remaining — <strong>460 kcal</strong></span>
-                        </div>
-                        <div class="ring-legend-item">
-                            <div class="ring-dot" style="background:#f97316"></div>
-                            <span>Burned — <strong>220 kcal</strong></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Macro bars -->
-            <div style="padding:0 22px 6px">
-                <p style="font-size:.78rem;font-weight:600;color:#7a9a7a;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Macronutrients</p>
-            </div>
-            <div class="macro-row">
-                <span class="macro-name">Protein</span>
-                <div class="macro-track"><div class="macro-fill" style="width:72%;background:#57aa46"></div></div>
-                <span class="macro-val">72 / 100g</span>
-            </div>
-            <div class="macro-row">
-                <span class="macro-name">Carbs</span>
-                <div class="macro-track"><div class="macro-fill" style="width:58%;background:#3b82f6"></div></div>
-                <span class="macro-val">116 / 200g</span>
-            </div>
-            <div class="macro-row" style="padding-bottom:18px">
-                <span class="macro-name">Fat</span>
-                <div class="macro-track"><div class="macro-fill" style="width:44%;background:#f59e0b"></div></div>
-                <span class="macro-val">26 / 60g</span>
-            </div>
-        </div>
-
-        <!-- AI Tip + Streak -->
-        <div class="card-box fade-up delay-2" style="margin-bottom:20px">
-            <div class="card-header"><h2>AI Insight</h2></div>
-            <div style="padding-top:16px">
-                <div class="streak-banner">
-                    <span class="fire">🔥</span>
-                    <div>
-                        <div class="streak-text">7-day tracking streak!</div>
-                        <div class="streak-sub">Keep it up — consistency is key</div>
-                    </div>
-                </div>
-                <div class="ai-tip">
-                    <div class="tip-label">✦ Gemini AI Recommendation</div>
-                    <p>Your protein intake is on track, but you're running low on complex carbs today. Consider adding a small sweet potato or brown rice to your next meal to maintain steady energy levels throughout the afternoon.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Wellness Goals -->
-        <div class="card-box fade-up delay-3" style="margin-bottom:20px">
-            <div class="card-header">
-                <h2>Wellness Goals</h2>
-                <button class="btn-edit">Manage</button>
-            </div>
-            <div class="goal-item">
-                <div class="goal-icon" style="background:#dcfce7">🏋️</div>
-                <div class="goal-info">
-                    <div class="gtitle">Lose 5 kg</div>
-                    <div class="gsub">Target: June 2025 · −3 kg progress</div>
-                </div>
-                <span class="goal-badge" style="background:#dcfce7;color:#15803d">60%</span>
-            </div>
-            <div class="goal-item">
-                <div class="goal-icon" style="background:#fef9c3">💧</div>
-                <div class="goal-info">
-                    <div class="gtitle">Drink 2.5L Water Daily</div>
-                    <div class="gsub">Today: 1.8L logged</div>
-                </div>
-                <span class="goal-badge" style="background:#fef9c3;color:#a16207">72%</span>
-            </div>
-            <div class="goal-item">
-                <div class="goal-icon" style="background:#ede9fe">🥦</div>
-                <div class="goal-info">
-                    <div class="gtitle">5 Servings of Veggies</div>
-                    <div class="gsub">Today: 3 of 5 logged</div>
-                </div>
-                <span class="goal-badge" style="background:#ede9fe;color:#6d28d9">60%</span>
-            </div>
-        </div>
-
-        <!-- Recent Meals -->
-        <div class="card-box fade-up delay-4">
-            <div class="card-header">
-                <h2>Recent Meals</h2>
-                <a href="#" style="font-size:.78rem;color:var(--leaf);font-weight:600;text-decoration:none">View all →</a>
-            </div>
-
-            <div class="meal-row">
-                <div class="meal-thumb">🥑</div>
-                <div class="meal-info">
-                    <div class="mname">Avocado Toast with Egg</div>
-                    <div class="mtime">Breakfast · 8:12 AM</div>
-                </div>
-                <div style="text-align:right">
-                    <div class="meal-cal">380 kcal</div>
-                    <div style="font-size:.72rem;color:#7a9a7a">P 18g · C 32g · F 20g</div>
-                </div>
-            </div>
-
-            <div class="meal-row">
-                <div class="meal-thumb">🍜</div>
-                <div class="meal-info">
-                    <div class="mname">Chicken Noodle Soup</div>
-                    <div class="mtime">Lunch · 12:45 PM</div>
-                </div>
-                <div style="text-align:right">
-                    <div class="meal-cal">510 kcal</div>
-                    <div style="font-size:.72rem;color:#7a9a7a">P 34g · C 55g · F 12g</div>
-                </div>
-            </div>
-
-            <div class="meal-row">
-                <div class="meal-thumb">🍎</div>
-                <div class="meal-info">
-                    <div class="mname">Apple + Almonds Snack</div>
-                    <div class="mtime">Snack · 3:20 PM</div>
-                </div>
-                <div style="text-align:right">
-                    <div class="meal-cal">210 kcal</div>
-                    <div style="font-size:.72rem;color:#7a9a7a">P 5g · C 28g · F 10g</div>
-                </div>
-            </div>
-
-            <div class="meal-row" style="padding:14px 22px">
-                <button onclick="window.location.href='#'" style="
-                    width:100%;padding:12px;
-                    background:var(--pale);border:1.5px dashed #aaccaa;
-                    border-radius:12px;cursor:pointer;
-                    font-size:.85rem;font-weight:600;color:var(--leaf);
-                    transition:background .2s;
-                " onmouseover="this.style.background='#d4edd4'" onmouseout="this.style.background='var(--pale)'">
-                    + Log a Meal with AI Scan
-                </button>
-            </div>
-        </div>
-
-    </main>
-</div>
-
-<!-- ══ EDIT MODAL ══ -->
-<div class="modal-overlay" id="editModal">
-    <div class="modal-box">
-        <h3>Edit Profile</h3>
-        <div class="form-row">
-            <div class="form-group">
-                <label>First Name</label>
-                <input type="text" id="fName" value="Alex"/>
-            </div>
-            <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" id="lName" value="Johnson"/>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Age</label>
-                <input type="number" id="fAge" value="27"/>
-            </div>
-            <div class="form-group">
-                <label>Gender</label>
-                <select id="fGender">
-                    <option>Female</option>
-                    <option>Male</option>
-                    <option>Non-binary</option>
-                    <option>Prefer not to say</option>
+            <div class="form-control mt-2">
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Activity Level</span></label>
+                <select id="fActivity" class="select select-bordered select-sm bg-[#edf7ea]">
+                    <option>Sedentary</option><option selected>Moderately Active</option><option>Very Active</option><option>Athlete</option>
                 </select>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Weight (kg)</label>
-                <input type="number" id="fWeight" value="62" step="0.1"/>
+            <div class="form-control mt-2">
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Diet Type</span></label>
+                <select id="fDiet" class="select select-bordered select-sm bg-[#edf7ea]">
+                    <option selected>Balanced</option><option>Vegetarian</option><option>Vegan</option><option>Keto</option><option>Paleo</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label>Height (cm)</label>
-                <input type="number" id="fHeight" value="165" step="0.1"/>
+            <div class="form-control mt-2">
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Primary Goal</span></label>
+                <select id="fGoal" class="select select-bordered select-sm bg-[#edf7ea]">
+                    <option selected>Lose Weight</option><option>Maintain Weight</option><option>Build Muscle</option><option>Improve Nutrition</option>
+                </select>
+            </div>
+            <div class="modal-action">
+                <button class="btn btn-sm" onclick="document.getElementById('editModal').close()">Cancel</button>
+                <button class="btn btn-sm bg-[#013220] text-white border-0 hover:bg-[#024a30]" onclick="saveProfile()">Save</button>
             </div>
         </div>
-        <div class="form-group">
-            <label>Activity Level</label>
-            <select id="fActivity">
-                <option>Sedentary</option>
-                <option selected>Moderately Active</option>
-                <option>Very Active</option>
-                <option>Athlete</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Diet Type</label>
-            <select id="fDiet">
-                <option selected>Balanced</option>
-                <option>Vegetarian</option>
-                <option>Vegan</option>
-                <option>Keto</option>
-                <option>Paleo</option>
-                <option>Gluten-Free</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Primary Goal</label>
-            <select id="fGoal">
-                <option selected>Lose Weight</option>
-                <option>Maintain Weight</option>
-                <option>Build Muscle</option>
-                <option>Improve Nutrition</option>
-            </select>
-        </div>
-        <div class="modal-actions">
-            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-            <button class="btn-save" onclick="saveProfile()">Save Changes</button>
-        </div>
-    </div>
-</div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
 
-<!-- ══ FOOTER ══ -->
-<footer style="background:var(--mint);text-align:center;padding:32px 24px;border-top:1px solid #b8ddb0">
-    <nav style="display:flex;justify-content:center;gap:24px;margin-bottom:16px">
-        <a href="#" style="color:var(--mid-green);font-size:.84rem;font-weight:600;text-decoration:none">About us</a>
-        <a href="#" style="color:var(--mid-green);font-size:.84rem;font-weight:600;text-decoration:none">Contact</a>
-    </nav>
-    <p style="font-size:.78rem;color:#5a7a5a">Copyright © All rights reserved by Nutrico Industries Ltd</p>
+    <!-- FOOTER -->
+       <footer class=" bg-[#cae9be] footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+  <nav class="grid grid-flow-col gap-4">
+    <a class="link link-hover">About us</a>
+    <a class="link link-hover">Contact</a>
+  </nav>
+  <nav>
+    <div class="grid grid-flow-col gap-4">
+      <a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          class="fill-current">
+          <path
+            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+        </svg>
+      </a>
+      <a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"> <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+        </svg>
+      </a>
+      <a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+          <path
+            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+  <aside>
+    <p>Copyright © All right reserved by Neutrico Industries Ltd</p>
+  </aside>
 </footer>
 
-<script>
-    // ── Date ──
-    const d = new Date();
-    document.getElementById('todayDate').textContent =
-        d.toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric' });
+    <script>
+        document.getElementById('todayDate').textContent =
+            new Date().toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
 
-    // ── Modal ──
-    function openModal()  { document.getElementById('editModal').classList.add('open'); }
-    function closeModal() { document.getElementById('editModal').classList.remove('open'); }
+        function saveProfile() {
+            const fn   = document.getElementById('fName').value.trim();
+            const ln   = document.getElementById('lName').value.trim();
+            const age  = document.getElementById('fAge').value;
+            const gen  = document.getElementById('fGender').value;
+            const wt   = parseFloat(document.getElementById('fWeight').value);
+            const ht   = parseFloat(document.getElementById('fHeight').value);
+            const act  = document.getElementById('fActivity').value;
+            const diet = document.getElementById('fDiet').value;
+            const goal = document.getElementById('fGoal').value;
 
-    document.getElementById('editModal').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
+            document.getElementById('displayName').textContent  = fn + ' ' + ln;
+            document.getElementById('displayGoal').textContent  = '🎯 ' + goal;
+            document.getElementById('infoAge').textContent      = age + ' years';
+            document.getElementById('infoGender').textContent   = gen;
+            document.getElementById('infoActivity').textContent = act.replace('Moderately ', 'Mod. ');
+            document.getElementById('infoDiet').textContent     = diet;
+            document.getElementById('statWeight').textContent   = wt;
+            document.getElementById('statHeight').textContent   = ht;
 
-    function saveProfile() {
-        const fn   = document.getElementById('fName').value.trim();
-        const ln   = document.getElementById('lName').value.trim();
-        const age  = document.getElementById('fAge').value;
-        const gen  = document.getElementById('fGender').value;
-        const wt   = parseFloat(document.getElementById('fWeight').value);
-        const ht   = parseFloat(document.getElementById('fHeight').value);
-        const act  = document.getElementById('fActivity').value;
-        const diet = document.getElementById('fDiet').value;
-        const goal = document.getElementById('fGoal').value;
+            const bmi = (wt / ((ht / 100) ** 2)).toFixed(1);
+            document.getElementById('bmiVal').textContent = bmi;
+            let cat = 'Underweight', pct = 20;
+            if (bmi >= 18.5) { cat = 'Normal Weight'; pct = 50; }
+            if (bmi >= 25)   { cat = 'Overweight';    pct = 72; }
+            if (bmi >= 30)   { cat = 'Obese';         pct = 90; }
+            document.getElementById('bmiCat').textContent = cat;
+            document.getElementById('arcFill').setAttribute('stroke-dashoffset', 200 - (pct / 100) * 200);
 
-        const fullName = fn + ' ' + ln;
-
-        // Update banner & sidebar
-        document.getElementById('displayName').textContent = fullName;
-        document.getElementById('infoName').textContent    = fullName;
-        document.getElementById('infoAge').textContent     = age + ' years';
-        document.getElementById('infoGender').textContent  = gen;
-        document.getElementById('infoActivity').textContent = act;
-        document.getElementById('infoDiet').textContent    = diet;
-        document.getElementById('statWeight').textContent  = wt;
-        document.getElementById('statHeight').textContent  = ht;
-        document.getElementById('displayGoal').textContent = '🎯 Goal: ' + goal;
-
-        // Recalc BMI
-        const bmi = (wt / ((ht / 100) ** 2)).toFixed(1);
-        document.getElementById('bmiVal').textContent = bmi;
-
-        let cat = 'Underweight', pct = 20;
-        if (bmi >= 18.5) { cat = 'Normal Weight'; pct = 50; }
-        if (bmi >= 25)   { cat = 'Overweight';    pct = 72; }
-        if (bmi >= 30)   { cat = 'Obese';         pct = 90; }
-
-        document.getElementById('bmiCat').textContent = cat;
-
-        // Arc visual (dashoffset goes from 200=empty to 0=full; map pct)
-        const offset = 200 - (pct / 100) * 200;
-        document.getElementById('arcFill').setAttribute('stroke-dashoffset', offset);
-
-        closeModal();
-    }
-
-    // ── Animate macro bars on load ──
-    document.addEventListener('DOMContentLoaded', () => {
-        const bars = document.querySelectorAll('.macro-fill');
-        bars.forEach(b => {
-            const w = b.style.width;
-            b.style.width = '0';
-            setTimeout(() => { b.style.width = w; }, 300);
-        });
-    });
-</script>
-
+            document.getElementById('editModal').close();
+        }
+    </script>
 </body>
 </html>
