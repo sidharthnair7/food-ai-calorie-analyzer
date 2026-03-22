@@ -8,7 +8,7 @@ An AI-powered web application that analyzes food images and provides calorie est
 
 Watch the full demo here:
 
-👉 [https://youtube.com/YOUR_VIDEO_LINK](https://www.youtube.com/watch?v=Us4_M71KpZs)
+👉 [DEMO VIDEO](https://www.youtube.com/watch?v=Us4_M71KpZs)
 
 ---
 
