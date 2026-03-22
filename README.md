@@ -16,7 +16,7 @@ Watch the full demo here:
 
 ### 🖥️ Main Interface
 
-![Main UI](assets/screenshot-main.png)
+![Main UI](./assets/screenshot-main.png)
 
 > Clean and responsive UI with real-time camera capture and AI-powered nutrition insights.
 
