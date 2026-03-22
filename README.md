@@ -19,7 +19,7 @@ An AI-powered web application that captures food images via webcam and provides 
 ## 📸 Screenshots
 
 ### 🖥️ Main Interface
-![Main UI](https://raw.githubusercontent.com/sidharthnair7/food-ai-calorie-analyzer/main/assets/screenshot-main.png)
+![Main UI](assets/screenshot-main.png)
 
 > Clean and responsive UI with real-time camera capture and AI-powered nutrition insights.
 
