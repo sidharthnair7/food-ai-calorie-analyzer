@@ -14,14 +14,6 @@ An AI-powered web application that captures food images via webcam and provides 
 ## 🎥 Demo Video
 👉 [![Demo Video](https://img.youtube.com/vi/Us4_M71KpZs/maxresdefault.jpg)](https://www.youtube.com/watch?v=Us4_M71KpZs)
 
----
-
-## 📸 Screenshots
-
-### 🖥️ Main Interface
-![Main UI](https://imgur.com/a/9sEqz8I))
-
-> Clean and responsive UI with real-time camera capture and AI-powered nutrition insights.
 
 ---
 
