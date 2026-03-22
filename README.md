@@ -2,6 +2,7 @@
 
 > Built at a hackathon in under 24 hours — helping users make informed nutritional choices using AI-powered food recognition.
 
+
 ![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-brightgreen?style=flat-square)
 ![React](https://img.shields.io/badge/React-Vite-61DAFB?style=flat-square)
